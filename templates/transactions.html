@@ -1,47 +1,67 @@
 {% extends '_base.html' %}
 
 {% block content %}
-  <table class="min-w-full bg-white border border-black">
-    <thead>
-      <tr>
-        <th>Transaction Date</th>
-        <th>Transaction ID</th>
-        <th>Amount Deposited</th>
-        <th>Amount Withdrawn</th>
-        <th>Balance</th>
-        <th>Notes</th>
-      </tr>
-    </thead>
+  <div class="container mx-6 my-4 mt-8 relative overflow-x-auto">
+    <caption class="text-lg font-semibold text-left rtl:text-right text-gray-900 bg-white dark:text-white dark:bg-gray-800">
+      Monthly Statement<p class="text-sm font-normal text-gray-500 dark:text-gray-400">List of transactions order by date.</p>
+    </caption>
+  </div>
 
-    <tbody>
-      {% for transaction in transactions %}
-        <tr class="bg-white lg:hover:bg-gray-100 flex lg:table-row flex-row lg:flex-row flex-wrap lg:flex-no-wrap mb-10 lg:mb-0 border border-black">
-          <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static">{{ transaction.transaction_date }}</td>
-          <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static">{{ transaction.transaction_id }}</td>
-          <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static">
-            {% if transaction.amount_deposited %}
-              <span>{{ transaction.amount_deposited }}</span>
-            {% else %}
-              <span>-</span>
-            {% endif %}
-          </td>
-          <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static">
-            {% if transaction.amount_withdrawn %}
-              <span>{{ transaction.amount_withdrawn }}</span>
-            {% else %}
-              <span>-</span>
-            {% endif %}
-          </td>
-          <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static">{{ transaction.balance }}</td>
-          <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static">
-            {% if transaction.others %}
-              <span>{{ transaction.others }}</span>
-            {% else %}
-              <span>-</span>
-            {% endif %}
-          </td>
+  <div class="container mx-auto mt-8 relative overflow-x-auto shadow-md sm:rounded-lg">
+    <table class="w-full text-sm text-left rtl:text-right text-gray-800 dark:text-gray-400">
+      <thead>
+        <tr>
+          <th scope="col" class="px-6 py-3 bg-gray-50 dark:bg-gray-800 text-center">Sr. No.</th>
+          <th scope="col" class="px-6 py-3 bg-gray-50 dark:bg-gray-800 text-center">Transaction Date</th>
+          <th scope="col" class="px-6 py-3 bg-gray-50 dark:bg-gray-800 text-center">Transaction ID</th>
+          <th scope="col" class="px-6 py-3 bg-gray-50 dark:bg-gray-800 text-center">Amount Deposited</th>
+          <th scope="col" class="px-6 py-3 bg-gray-50 dark:bg-gray-800 text-center">Amount Withdrawn</th>
+          <th scope="col" class="px-6 py-3 bg-gray-50 dark:bg-gray-800 text-center">Balance</th>
+          <th scope="col" class="px-6 py-3 bg-gray-50 dark:bg-gray-800 text-center">Notes</th>
         </tr>
-      {% endfor %}
-    </tbody>
-  </table>
+      </thead>
+
+      <tbody>
+        <tr class="font-semibold text-gray-900 dark:text-black">
+          <th scope="row" class="px-6 py-3 text-left">Opening Balance:</th>
+          <td class="px-6 py-3">{{ opening_balance }}</td>
+        </tr>
+        {% for transaction in transactions %}
+          <tr class="border-b border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-200">
+            <td class="w-fit lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static">{{ forloop.counter }}</td>
+            <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static">{{ transaction.transaction_date }}</td>
+            <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static">{{ transaction.transaction_id }}</td>
+            <td class="w-full lg:w-auto p-3 text-center border border-b block lg:table-cell relative lg:static">
+              {% if transaction.amount_deposited %}
+                <span class="text-green-600">{{ transaction.amount_deposited }}</span>
+              {% else %}
+                <span class="text-grey-800">-</span>
+              {% endif %}
+            </td>
+            <td class="w-full lg:w-auto p-3 text-center border border-b block lg:table-cell relative lg:static">
+              {% if transaction.amount_withdrawn %}
+                <span class="text-red-600">{{ transaction.amount_withdrawn }}</span>
+              {% else %}
+                <span class="text-grey-800">-</span>
+              {% endif %}
+            </td>
+            <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static">{{ transaction.balance }}</td>
+            <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static">
+              {% if transaction.others %}
+                <span>{{ transaction.others }}</span>
+              {% else %}
+                <span>-</span>
+              {% endif %}
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+      <tfoot>
+        <tr class="font-semibold text-gray-900 dark:text-black">
+          <th scope="row" class="px-6 py-3 text-left">Closing Balance:</th>
+          <td class="px-6 py-3">{{ closing_balance }}</td>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
 {% endblock %}

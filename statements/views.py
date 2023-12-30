@@ -2,7 +2,9 @@ from typing import Any
 from django.views.generic import DetailView, ListView
 from django.http import HttpRequest, HttpResponse, JsonResponse
 from django.shortcuts import render
-from statements.models import Transaction
+from statements.pydantic import Transaction
+from typing import List
+from statements.services.transactions import get_transactions
 
 
 class StatementsDetailView(DetailView):
@@ -12,46 +14,32 @@ class StatementsDetailView(DetailView):
 
 class TransactionsListView(ListView):
     def get(self, request: HttpRequest, *args: Any, **kwargs: Any) -> HttpResponse:
-        transactions = [
-            Transaction(
-                transaction_id="txn_001",
-                transaction_date="2023-12-01",
-                amount_deposited="100.00",
-                amount_withdrawn=None,
-                balance="100.00",
-                others="First money",
-            ),
-            Transaction(
-                transaction_id="txn_002",
-                transaction_date="2023-12-02",
-                amount_deposited="100.00",
-                amount_withdrawn=None,
-                balance="200.00",
-                others="Second money",
-            ),
-            Transaction(
-                transaction_id="txn_003",
-                transaction_date="2023-12-03",
-                amount_deposited=None,
-                amount_withdrawn="50.00",
-                balance="150.00",
-                others="Third money",
-            ),
-            Transaction(
-                transaction_id="txn_004",
-                transaction_date="2023-12-04",
-                amount_deposited="100.00",
-                amount_withdrawn=None,
-                balance="250.00",
-                others="Fourht money",
-            ),
-            Transaction(
-                transaction_id="txn_005",
-                transaction_date="2023-12-05",
-                amount_deposited=None,
-                amount_withdrawn="50.00",
-                balance="200.00",
-                others=None,
-            ),
-        ]
-        return render(request, "transactions.html", {"transactions": transactions})
+        opening_balance = 371535.33
+        closing_balance = opening_balance
+        transactions: List[Transaction] = get_transactions(
+            file_path="/Users/jayachandram/src/explore/bank-statements/test.pdf",
+            password="JAYA1411",
+        )
+        for transaction in transactions:
+            closing_balance = (
+                closing_balance
+                + (
+                    round(float(transaction.amount_deposited), 2)
+                    if transaction.amount_deposited
+                    else 0.0
+                )
+                - (
+                    round(float(transaction.amount_withdrawn), 2)
+                    if transaction.amount_withdrawn
+                    else 0.0
+                )
+            )
+        return render(
+            request,
+            "transactions.html",
+            {
+                "transactions": [txn.model_dump() for txn in transactions],
+                "closing_balance": round(closing_balance, 2),
+                "opening_balance": round(opening_balance, 2),
+            },
+        )
