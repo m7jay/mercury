@@ -1,0 +1,47 @@
+{% extends '_base.html' %}
+
+{% block content %}
+  <table class="min-w-full bg-white border border-black">
+    <thead>
+      <tr>
+        <th>Transaction Date</th>
+        <th>Transaction ID</th>
+        <th>Amount Deposited</th>
+        <th>Amount Withdrawn</th>
+        <th>Balance</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      {% for transaction in transactions %}
+        <tr class="bg-white lg:hover:bg-gray-100 flex lg:table-row flex-row lg:flex-row flex-wrap lg:flex-no-wrap mb-10 lg:mb-0 border border-black">
+          <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static">{{ transaction.transaction_date }}</td>
+          <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static">{{ transaction.transaction_id }}</td>
+          <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static">
+            {% if transaction.amount_deposited %}
+              <span>{{ transaction.amount_deposited }}</span>
+            {% else %}
+              <span>-</span>
+            {% endif %}
+          </td>
+          <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static">
+            {% if transaction.amount_withdrawn %}
+              <span>{{ transaction.amount_withdrawn }}</span>
+            {% else %}
+              <span>-</span>
+            {% endif %}
+          </td>
+          <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static">{{ transaction.balance }}</td>
+          <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static">
+            {% if transaction.others %}
+              <span>{{ transaction.others }}</span>
+            {% else %}
+              <span>-</span>
+            {% endif %}
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}
