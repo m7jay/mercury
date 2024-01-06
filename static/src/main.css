@@ -48,3 +48,28 @@
 .open .hamburger-bottom {
     transform: rotate(-45deg) translateY(6px) translate(-6px);
 }
+
+
+#id_password_helptext>a {
+    --tw-space-y-reverse: 0;
+    margin-top: calc(1rem
+            /* 16px */
+            * calc(1 - var(--tw-space-y-reverse)));
+    margin-bottom: calc(1rem
+            /* 16px */
+            * var(--tw-space-y-reverse));
+    display: block;
+}
+
+#id_password_helptext>a:link {
+    margin-left: 6px;
+    color: black;
+    text-decoration: underline;
+
+}
+
+#id_password_helptext>a:hover {
+    margin-left: 6px;
+    --tw-text-opacity: 1;
+    color: rgb(37 99 235 / var(--tw-text-opacity));
+}

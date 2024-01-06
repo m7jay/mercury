@@ -2,6 +2,12 @@
 static:
 	tailwindcss -i ./static/src/main.css -o ./static/src/output.css --minify --watch
 
+.PHONY: stop
+stop:
+	docker-compose -f ./docker-compose.local.yml ps
+	echo "stopping.."
+	docker-compose -f ./docker-compose.local.yml stop
+
 .PHONY: mercury
 mercury:
 	docker-compose -f ./docker-compose.local.yml up -d
