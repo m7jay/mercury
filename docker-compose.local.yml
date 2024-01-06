@@ -1,0 +1,41 @@
+version: '3'
+
+services:
+  mercury-db:
+    platform: linux/arm64/v8
+    container_name: mercury-db
+    image: mysql:8.0
+    command: --default-authentication-plugin=mysql_native_password
+    env_file: ./.env
+    environment:
+      - MYSQL_ROOT_HOST=%
+      - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}
+    restart: unless-stopped
+    ports:
+      - "3310:3306"
+    volumes:
+      - ./docker/mysql-local-init:/docker-entrypoint-initdb.d
+    logging:
+      driver: "json-file"
+      options:
+        max-size: 10m
+        max-file: "7"
+        compress: "true"
+
+  mercury-service:
+    image: mercury-service
+    command: python -m debugpy --listen 0.0.0.0:9999 manage.py runserver 0.0.0.0:3000
+    depends_on:
+      - mercury-db
+    ports:
+      - "9000:9000"
+      - "3000:3000"
+    volumes:
+      - .:/app
+    restart: always
+    logging:
+      driver: "json-file"
+      options:
+        max-size: 10m
+        max-file: "7"
+        compress: "true"

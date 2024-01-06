@@ -18,6 +18,7 @@ ALLOWED_HOSTS = get_csv_list(env.get_value("ALLOWED_HOSTS"))
 
 # database
 DB_HOST = env.get_value("DB_HOST")
+DB_PORT = env.get_value("DB_PORT")
 DB_NAME = env.get_value("DB_NAME")
 DB_USER = env.get_value("DB_USER")
 DB_PASSWORD = env.get_value("DB_PASSWORD")

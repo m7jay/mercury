@@ -4,11 +4,35 @@ static:
 
 .PHONY: mercury
 mercury:
-	python manage.py makemigrations
-	python manage.py migrate
-	python manage.py runserver
+	docker-compose -f ./docker-compose.local.yml up -d
+	docker-compose -f ./docker-compose.local.yml ps
 
 .PHONY: shell
 shell:
-	python manage.py migrate
-	python manage.py shell_plus --ipython
+	docker-compose -f ./docker-compose.local.yml run --rm mercury-service python manage.py shell_plus --ipython
+
+.PHONY: migrate
+migrate:
+	docker-compose -f ./docker-compose.local.yml run --rm mercury-service python manage.py migrate
+
+.PHONY: makemigrations
+makemigrations:
+	docker-compose -f ./docker-compose.local.yml run --rm mercury-service python manage.py makemigrations
+
+.PHONY: build
+build:
+	docker-compose -f ./docker-compose.build.yml build mercury-service
+
+.PHONY: delpoy-check
+deploy-check:
+	docker-compose -f ./docker-compose.local.yml run --rm mercury-service python manage.py check --deploy
+
+.PHONY: deploy
+deploy:
+	git pull
+	make build
+	make migrate
+	make deploy-check
+	make mercury
+
+

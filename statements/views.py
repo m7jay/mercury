@@ -17,7 +17,7 @@ class TransactionsListView(ListView):
         opening_balance = 371535.33
         closing_balance = opening_balance
         transactions: List[Transaction] = get_transactions(
-            file_path="/Users/jayachandram/src/explore/bank-statements/test.pdf",
+            file_path="./test.pdf",
             password="JAYA1411",
         )
         for transaction in transactions:

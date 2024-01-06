@@ -1,0 +1,7 @@
+version: '3'
+
+services:
+  mercury-service:
+    build: .
+    image: mercury-service
+    env_file: ./.env

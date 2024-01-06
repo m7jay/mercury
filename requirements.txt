@@ -16,17 +16,19 @@ Django==5.0
 django-allauth==0.59.0
 django-appconf==1.0.6
 django-compressor==4.4
+django-environ==0.11.2
 django-extensions==3.2.3
+django-mysql==3.5.0
 et-xmlfile==1.1.0
 executing==2.0.1
 idna==3.6
 ipykernel==6.28.0
 ipython==8.19.0
 jedi==0.19.1
-JPype1==1.5.0
 jupyter_client==8.6.0
 jupyter_core==5.5.1
 matplotlib-inline==0.1.6
+mysqlclient==2.0.3
 nest-asyncio==1.5.8
 numpy==1.26.2
 oauthlib==3.2.2
@@ -64,3 +66,4 @@ typing_extensions==4.9.0
 tzdata==2023.4
 urllib3==2.1.0
 wcwidth==0.2.12
+
