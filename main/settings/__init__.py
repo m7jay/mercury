@@ -44,8 +44,8 @@ INSTALLED_APPS = [
     # all auth
     "allauth",
     "allauth.account",
-    "allauth.socialaccount",
-    "allauth.socialaccount.providers.google",
+    # "allauth.socialaccount",
+    # "allauth.socialaccount.providers.google",
 ]
 
 MIDDLEWARE = [
@@ -89,31 +89,16 @@ AUTHENTICATION_BACKENDS = (
     "django.contrib.auth.backends.ModelBackend",
 )
 
+SITE_ID = 1
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_AUTHENTICATION_METHOD = "email"
-ACCOUNT_EMAIL_VERIFICATION = "mandatory"
+ACCOUNT_EMAIL_VERIFICATION = "none"
 LOGIN_REDIRECT_URL = "/"
 LOGOUT_REDIRECT_URL = "/"
 
 # Provider specific settings
-SOCIALACCOUNT_PROVIDERS = {
-    "google": {
-        "SCOPE": [
-            "profile",
-            "email",
-        ],
-        "AUTH_PARAMS": {
-            "access_type": "online",
-        },
-        "OAUTH_PKCE_ENABLED": True,
-        "mercury": {
-            "client_id": "xxx",
-            "secret": "xxxx",
-            "key": "",
-        },
-    }
-}
+SOCIALACCOUNT_PROVIDERS = {}
 
 
 AUTH_PASSWORD_VALIDATORS = [
