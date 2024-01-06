@@ -1,0 +1,34 @@
+<nav class="relative container mx-auto p-6">
+  <div class="flex items-center justify-between bg-white">
+    <!-- Name -->
+    <div class="pt-2">
+      <a href="/" class="text-2xl font-extrabold">Mercury</a>
+    </div>
+    <!-- Menu Items -->
+    <div class="pt-2 hidden space-x-6 md:flex font-semibold">
+      <a href="/" class="hover:text-blue-600">Home</a>
+      <a href="/transactions" class="hover:text-blue-600">Transactions</a>
+      <a href="#" class="hover:text-blue-600">Summary</a>
+      <a href="#" class="hover:text-blue-600">About</a>
+    </div>
+    <!-- Signup button -->
+    <a href="" class="hidden px-6 py-2 text-white bg-black rounded-full baseline text-center hover:bg-blue-800 md:block">Sign Up</a>
+
+    <!-- Hamburger Icon -->
+    <button id="menu-btn" class="block hamburger md:hidden focus:outline-none">
+      <span class="hamburger-top"></span>
+      <span class="hamburger-middle"></span>
+      <span class="hamburger-bottom"></span>
+    </button>
+  </div>
+
+  <!-- Mobile Menu -->
+  <div class="md:hidden">
+    <div id="menu" class="relative flex-col items-center self-end py-8 pt-10 space-y-6 font-bold bg-black sm:w-auto sm:self-center text-white left-6 right-6 drop-shadow-md hidden">
+      <a href="/" class="hover:text-gray-400">Home</a>
+      <a href="/transactions" class="hover:text-gray-400">Transactions</a>
+      <a href="#" class="hover:text-gray-400">Summary</a>
+      <a href="#" class="hover:text-gray-400">About</a>
+    </div>
+  </div>
+</nav>

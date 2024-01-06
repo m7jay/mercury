@@ -1,5 +1,112 @@
 {% extends '_base.html' %}
 
 {% block content %}
-  <h1 class="bg-red-300">Hello Mercury World</h1>
+  <!-- Hero Section -->
+  <section id="hero">
+    <div class="container flex flex-col space-y-6 items-start justify-around px-6 mx-auto">
+      <div class="flex flex-col pt-10 space-y-6 justify-start items-start">
+        <div class="flex flex-col mx-auto space-y-4 justify-center items-left">
+          <h2 class="font-semibold text-2xl">Unlock Financial Clarity: Track Your Expenses with Ease</h2>
+          <p>Take control of your finances like never before. Our powerful expense tracking solution simplifies the way you manage your money. Effortlessly analyze your spending habits, budget wisely, and stay financially organized—all with the convenience of PDF bank statements.</p>
+        </div>
+        <a href="" class="px-6 py-2 text-white bg-black rounded-full baseline text-center hover:bg-blue-800">Get Started</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section id="section">
+    <div class="container flex flex-col px-4 mx-auto mt-10 space-y-12 md:space-y-0 md:flex-row">
+      <!-- Numbered list -->
+      <div class="flex flex-col space-y-6 md:w-1/2">
+        <div class="flex flex-col space-y-3 md:space-y-0 md:space-x-6 md:flex-row">
+          <h2 class="max-w-md text-4xl font-bold text-center md:flex-row">Key Features</h2>
+        </div>
+
+        <!-- Item 1 -->
+        <div class="flex flex-col space-y-3 md:space-y-0 md:space-x-6 md:flex-row">
+          <!-- Item Heading in small screen -->
+          <div class="rounded-l-full bg-cyan-50 md:bg-transparent">
+            <div class="flex items-center space-x-2">
+              <div class="px-4 py-2 rounded-full bg-cyan-50 md:py-1">01</div>
+              <h3 class="text-base font-bold md:mb-4 md:hidden">Financial Awareness</h3>
+              <p class="text-base md:hidden">Gain a clear understanding of where your money goes.</p>
+            </div>
+          </div>
+          <!-- Item heading in medium screen -->
+          <div>
+            <h3 class="hidden mb-1 text-lg font-bold md:block">Financial Awareness</h3>
+            <p class="hidden text-base md:block">Gain a clear understanding of where your money goes.</p>
+          </div>
+        </div>
+        <!-- Item 2 -->
+        <div class="flex flex-col space-y-3 md:space-y-0 md:space-x-6 md:flex-row">
+          <!-- Item Heading in small screen -->
+          <div class="rounded-l-full bg-cyan-50 md:bg-transparent">
+            <div class="flex items-center space-x-2">
+              <div class="px-4 py-2 rounded-full bg-cyan-50 md:py-1">02</div>
+              <h3 class="text-base font-bold md:mb-4 md:hidden">Effortless Organization</h3>
+              <p class="text-base md:hidden">Seamlessly organize your expenses using PDF bank statements.</p>
+            </div>
+          </div>
+          <!-- Item heading in medium screen -->
+          <div>
+            <h3 class="hidden mb-1 text-lg font-bold md:block">Effortless Organization</h3>
+            <p class="hidden text-base md:block">Seamlessly organize your expenses using PDF bank statements.</p>
+          </div>
+        </div>
+        <!-- Item 3 -->
+        <div class="flex flex-col space-y-3 md:space-y-0 md:space-x-6 md:flex-row">
+          <!-- Item Heading in small screen -->
+          <div class="rounded-l-full bg-cyan-50 md:bg-transparent">
+            <div class="flex items-center space-x-2">
+              <div class="px-4 py-2 rounded-full bg-cyan-50 md:py-1">03</div>
+              <h3 class="text-base font-bold md:mb-4 md:hidden">Smart Budgeting</h3>
+              <p class="text-base md:hidden">Plan and manage your budget effectively for a secure financial future.</p>
+            </div>
+          </div>
+          <!-- Item heading in medium screen -->
+          <div>
+            <h3 class="hidden mb-1 text-lg font-bold md:block">Smart Budgeting</h3>
+            <p class="hidden text-base md:block">Plan and manage your budget effectively for a secure financial future.</p>
+          </div>
+        </div>
+        <!-- Item 4 -->
+        <div class="flex flex-col space-y-3 md:space-y-0 md:space-x-6 md:flex-row">
+          <!-- Item Heading in small screen -->
+          <div class="rounded-l-full bg-cyan-50 md:bg-transparent">
+            <div class="flex items-center space-x-2">
+              <div class="px-4 py-2 rounded-full bg-cyan-50 md:py-1">04</div>
+              <h3 class="text-base font-bold md:mb-4 md:hidden">User-Friendly</h3>
+              <p class="text-base md:hidden">Our intuitive interface makes expense tracking a breeze.</p>
+            </div>
+          </div>
+          <!-- Item heading in medium screen -->
+          <div>
+            <h3 class="hidden mb-1 text-lg font-bold md:block">User-Friendly</h3>
+            <p class="hidden text-base md:block">Our intuitive interface makes expense tracking a breeze.</p>
+          </div>
+        </div>
+        <!-- Item 5 -->
+        <div class="flex flex-col space-y-3 md:space-y-0 md:space-x-6 md:flex-row">
+          <!-- Item Heading in small screen -->
+          <div class="rounded-l-full bg-cyan-50 md:bg-transparent">
+            <div class="flex items-center space-x-2">
+              <div class="px-4 py-2 rounded-full bg-cyan-50 md:py-1">05</div>
+              <h3 class="text-base font-bold md:mb-4 md:hidden">Convenient PDF Integration</h3>
+              <p class="text-base md:hidden">Easily import and analyze your bank statements in PDF format.</p>
+            </div>
+          </div>
+          <!-- Item heading in medium screen -->
+          <div>
+            <h3 class="hidden mb-1 text-lg font-bold md:block">Convenient PDF Integration</h3>
+            <p class="hidden text-base md:block">Easily import and analyze your bank statements in PDF format.</p>
+          </div>
+        </div>
+      </div>
+      <div class="hidden md:block px-10">
+        <img class="h-auto max-w-lg ms-auto rounded-lg" src="/static/images/calculating.jpg" alt="calculating img" />
+      </div>
+    </div>
+  </section>
 {% endblock %}
