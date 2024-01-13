@@ -4,10 +4,10 @@
     {% trans "Sign Out" %}
 {% endblock head_title %}
 {% block content %}
-    {% element h1 %}
-        {% trans "Sign Out" %}
-    {% endelement %}
-    <p>{% trans 'Are you sure you want to sign out?' %}</p>
+    <div class="mx-auto px-6 py-4 flex flex-col space-y-4 md:w-1/2">
+        <h1 class="text-2xl font-semibold">Sign Out</h1>
+        <p class="text-sm font-light">{% trans 'Are you sure you want to sign out?' %}</p>
+    </div>
     {% url 'account_logout' as action_url %}
     {% element form method="post" action=action_url no_visible_fields=True %}
         {% slot body %}
@@ -20,7 +20,9 @@
         {% endslot %}
         {% slot actions %}
             {% element button type="submit" %}
-                {% trans 'Sign Out' %}
+            <div class="mx-auto px-4 py-2 block text-white bg-black rounded-full baseline text-center hover:bg-blue-800">
+            {% trans 'Sign Out' %}
+            </div>
             {% endelement %}
         {% endslot %}
     {% endelement %}
