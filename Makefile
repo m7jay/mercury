@@ -29,6 +29,10 @@ makemigrations:
 build:
 	docker-compose -f ./docker-compose.build.yml build mercury-service
 
+.PHONY: build-no-cache
+build-no-cache:
+	docker-compose -f ./docker-compose.build.yml build --no-cache mercury-service
+
 .PHONY: delpoy-check
 deploy-check:
 	docker-compose -f ./docker-compose.local.yml run --rm mercury-service python manage.py check --deploy
