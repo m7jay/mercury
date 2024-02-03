@@ -5,10 +5,6 @@ from typing import List, Optional
 from pydantic import BaseModel
 from babel.numbers import format_currency, parse_decimal, NumberFormatError
 
-# import os
-# print(os.environ.get("JAVA_HOME"))
-# os.environ["JAVA_HOME"] = "/opt/homebrew/opt/openjdk@11"
-
 
 class Transaction(BaseModel):
     txn_date: date
@@ -57,6 +53,7 @@ def parse_amt(amount: str, locale: str = "en_IN") -> float:
         parsed_amount = 0.0
     return parsed_amount
 
+
 def get_merged_tables(tables: List[pd.DataFrame]) -> pd.DataFrame:
     table_columns = [
         "txn_date",
@@ -80,7 +77,7 @@ def get_merged_tables(tables: List[pd.DataFrame]) -> pd.DataFrame:
                     "balance": [columns[4]],
                     "others": [columns[5]],
                 },
-                columns=table_columns
+                columns=table_columns,
             )
             table.columns = table_columns
             table = pd.concat([new_row, table], ignore_index=True)
@@ -102,9 +99,6 @@ def get_transactions(tables: List[pd.DataFrame]) -> List[Transaction]:
             row["deposits"],
             row["balance"],
             row["others"],
-        )
-        print(
-            f"{txn_date=}, {txn=}, {withdrawls=}, {deposits=}, {balance=}, {others=}"
         )
         try:
             transactions.append(
@@ -135,8 +129,6 @@ for txn in txns:
     income += round(txn.amt_deposited, 2)
     balance = balance + txn.amt_deposited - txn.amt_withdrawn
     txn.balance = balance
-
-print(f"Income: {income}, expense: {expenses}, balace: {balance}")
 
 res = pd.DataFrame([txn.model_dump() for txn in txns])
 res.to_excel("res2.xlsx", index=False)

@@ -1,9 +1,11 @@
+import io
 from logging import getLogger
 from typing import Any
 from django.views.generic import DetailView, ListView, FormView
 import uuid
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render, redirect
+from statements.services.csv_extract import get_transactions_from_csv
 from statements.services.transactions import (
     get_transactions_from_uploaded_file,
     create_or_update_transactions,
@@ -54,10 +56,13 @@ class StatementsDetailView(DetailView):
 class StatementsListView(ListView):
     def get(self, request: HttpRequest, *args: Any, **kwargs: Any) -> HttpResponse:
         statements = Statement.objects.filter(user=request.user).order_by("month")
+        data = StatementSerializer(statements, many=True).data
+        for s in data:
+            s["diff"] = round(s["closing_balance"] - s["opening_balance"], 2)
         return render(
             request,
             "statements.html",
-            {"statements": StatementSerializer(statements, many=True).data},
+            {"statements": data},
         )
 
 
@@ -69,23 +74,24 @@ class UploadFileView(FormView):
         if request.user.is_authenticated:
             form = UploadFileForm(request.POST, request.FILES)
             if form.is_valid():
-                # handle file input & create statement, transactions
-                transactions = get_transactions_from_uploaded_file(
-                    form.cleaned_data["title"],
-                    form.cleaned_data["file"],
-                    password=form.cleaned_data["password"],
-                )
-                print(f"{transactions=}")
+                file = form.cleaned_data["file"]
+                decoded_file = file.read().decode("utf-8")
+                io_string = io.StringIO(decoded_file)
+                transactions = get_transactions_from_csv(io_string)
+
                 statements = create_or_update_transactions(
                     name=form.cleaned_data["title"],
                     transactions=transactions,
                     user=request.user,
                 )
-                serialized_statements = StatementSerializer(statements, many=True)
+                data = StatementSerializer(statements, many=True)
+                for s in data:
+                    s["diff"] = round(s["closing_balance"] - s["opening_balance"], 2)
+
                 return render(
                     request,
                     "statements.html",
-                    {"statements": serialized_statements.data},
+                    {"statements": data},
                 )
             else:
                 return self.form_invalid(form)
