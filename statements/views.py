@@ -1,6 +1,7 @@
+from logging import getLogger
 from typing import Any
 from django.views.generic import DetailView, ListView, FormView
-
+import uuid
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render, redirect
 from statements.services.transactions import (
@@ -12,6 +13,8 @@ from django.contrib.auth.decorators import login_required
 from statements.form import UploadFileForm
 from statements.serializers import StatementSerializer, TransactionsSerializer
 
+logger = getLogger("__name__")
+
 
 class LandingPage(DetailView):
     def get(self, request):
@@ -20,11 +23,12 @@ class LandingPage(DetailView):
 
 class StatementsDetailView(DetailView):
 
-    def get(self, request: HttpRequest, *args: Any, **kwargs: Any) -> HttpResponse:
-        latest_statement: Statement = (
-            Statement.objects.filter(user=request.user).order_by("month").last()
+    def get(self, request: HttpRequest, unique_id: uuid.UUID) -> HttpResponse:
+        logger.info("getting details for statement id: {}".format(str(unique_id)))
+        statement: Statement = Statement.objects.get(
+            user=request.user, unique_id=unique_id
         )
-        transactions = latest_statement.transactions.all().order_by("transaction_date")
+        transactions = statement.transactions.all().order_by("transaction_date")
 
         first_transaction: Transaction = transactions.first()
         last_transaction: Transaction = transactions.last()

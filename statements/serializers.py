@@ -7,6 +7,7 @@ class StatementSerializer(serializers.ModelSerializer):
     opening_balance = serializers.SerializerMethodField()
     closing_balance = serializers.SerializerMethodField()
     month = serializers.SerializerMethodField()
+    id = serializers.UUIDField(source="unique_id")
 
     def get_month(self, statement):
         return statement.month.strftime("%b - %Y")
@@ -34,6 +35,7 @@ class StatementSerializer(serializers.ModelSerializer):
     class Meta:
         model = Statement
         fields = [
+            "id",
             "month",
             "user_id",
             "transactions_count",
