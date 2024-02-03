@@ -1,0 +1,12 @@
+{% extends '_base.html' %}
+
+{% block content %}
+  <h2 class="mx-auto my-6 px-6 py-4">Upload PDF file with transactions</h2>
+  <div class="mx-auto items-center">
+    <form action="{{ request.build_absolute_uri }}" method="POST" enctype="multipart/form-data" class="mx-auto px-6 py-4 space-y-2 flex flex-col justify-between bg-blue-100">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit" class="w-1/2 bg-blue-800 text-white">Submit</button>
+    </form>
+  </div>
+{% endblock %}
