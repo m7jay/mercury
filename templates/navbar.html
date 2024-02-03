@@ -9,8 +9,8 @@
       {% if user.is_authenticated %}
         <a href="/" class="hover:text-blue-600">Home</a>
         <a href="/statements" class="hover:text-blue-600">Statements</a>
-        <a href="/upload" class="hover:text-blue-600">Upload</a>
-        <a href="#" class="hover:text-blue-600">Summary</a>
+        <a href="/statements/upload" class="hover:text-blue-600">Upload</a>
+        <a href="/summary/balance" class="hover:text-blue-600">Summary</a>
         <a href="#" class="hover:text-blue-600">About</a>
       {% endif %}
     </div>
@@ -34,7 +34,7 @@
       {% if user.is_authenticated %}
         <a href="/" class="hover:text-gray-400">Home</a>
         <a href="/statements" class="hover:text-gray-400">Statements</a>
-        <a href="#" class="hover:text-gray-400">Summary</a>
+        <a href="/summary/balance" class="hover:text-gray-400">Summary</a>
         <a href="#" class="hover:text-gray-400">About</a>
       {% else %}
         <a href="#" class="hover:text-gray-400">Sign In</a>

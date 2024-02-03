@@ -7,20 +7,13 @@ from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render, redirect
 from statements.services.csv_extract import get_transactions_from_csv
 from statements.services.transactions import (
-    get_transactions_from_uploaded_file,
     create_or_update_transactions,
 )
 from statements.models import Statement, Transaction
-from django.contrib.auth.decorators import login_required
 from statements.form import UploadFileForm
 from statements.serializers import StatementSerializer, TransactionsSerializer
 
 logger = getLogger("__name__")
-
-
-class LandingPage(DetailView):
-    def get(self, request):
-        return render(request, "index.html")
 
 
 class StatementsDetailView(DetailView):
