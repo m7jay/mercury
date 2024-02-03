@@ -1,0 +1,66 @@
+{% extends '_base.html' %}
+
+{% block content %}
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <div class="container mx-auto my-4 mt-8 relative overflow-x-auto">
+    <canvas id="myChart"></canvas>
+  </div>
+  <script>
+const ctx = document.getElementById('myChart').getContext('2d');
+const myChart = new Chart(ctx, {
+  type: 'line',
+  data: {
+    labels : [{% for item in balances.labels %}"{{ item }}",{% endfor %}],
+      datasets: [{
+        label: "Balance",
+        data : [{% for item in balances.values %}{{ item }},{% endfor %}],
+        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+        borderColor: 'rgba(75, 192, 192, 1)',
+        borderWidth: 1
+      },
+      {
+        label: "Expense",
+        data : [{% for item in expenses.values %}{{ item }},{% endfor %}],
+        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+        borderColor: 'red',
+        borderWidth: 1
+      },{
+        label: "Income",
+        data : [{% for item in incomes.values %}{{ item }},{% endfor %}],
+        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+        borderColor: 'blue',
+        borderWidth: 1
+      }]
+  },
+  options: {
+    plugins: {
+      tooltip: {
+          callbacks: {
+              label: function(context) {
+                  let label = context.dataset.label || '';
+
+                  if (label) {
+                      label += ': ';
+                  }
+                  if (context.parsed.y !== null) {
+                      label += new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR' }).format(context.parsed.y);
+                  }
+                  return label;
+              }
+          }
+      }
+  },
+    scales: {
+      y: {
+        ticks: {
+          // Format y-axis labels as INR
+          callback: function (value, index, values) {
+            return '₹ ' + new Intl.NumberFormat('en-IN').format(value);
+          }
+        }
+      }
+    }
+  }
+});
+</script>
+{% endblock %}
