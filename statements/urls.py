@@ -1,7 +1,9 @@
 from django.urls import path
-from .views import StatementsDetailView, TransactionsListView
+from .views import LandingPage, StatementsDetailView, StatementsListView, UploadFileView
 
 urlpatterns = [
-    path('', StatementsDetailView.as_view(), name="statements-detail"),
-    path('transactions', TransactionsListView.as_view(), name="transactions")
+    path("", LandingPage.as_view(), name="landing-page"),
+    path("satements", StatementsListView.as_view(), name="statements-list"),
+    path("transactions", StatementsDetailView.as_view(), name="transactions-list"),
+    path("upload", UploadFileView.as_view(), name="upload-statements"),
 ]

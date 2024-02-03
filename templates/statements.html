@@ -1,0 +1,35 @@
+{% extends '_base.html' %}
+
+{% block content %}
+  <div class="container mx-auto my-4 mt-8 relative overflow-x-auto">
+    <caption class="text-lg font-semibold text-left rtl:text-right text-gray-900 bg-white dark:text-white dark:bg-gray-800">
+      Monthly Statements<p class="text-sm font-normal text-gray-500 dark:text-gray-400">List of statements order by date.</p>
+    </caption>
+  </div>
+
+  <div class="container mx-auto mt-8 relative overflow-x-auto shadow-md sm:rounded-lg">
+    <table class="w-full text-sm text-left rtl:text-right text-gray-800 dark:text-gray-400">
+      <thead>
+        <tr>
+          <th scope="col" class="px-6 py-3 bg-gray-50 dark:bg-gray-800 text-center">Sr. No.</th>
+          <th scope="col" class="px-6 py-3 bg-gray-50 dark:bg-gray-800 text-center">Month</th>
+          <th scope="col" class="px-6 py-3 bg-gray-50 dark:bg-gray-800 text-center">Transactions Count</th>
+          <th scope="col" class="px-6 py-3 bg-gray-50 dark:bg-gray-800 text-center">Opening Balance</th>
+          <th scope="col" class="px-6 py-3 bg-gray-50 dark:bg-gray-800 text-center">Closing Balance</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        {% for statement in statements %}
+          <tr class="border-b border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-200">
+            <td class="w-fit lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static">{{ forloop.counter }}</td>
+            <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static">{{ statement.month }}</td>
+            <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static">{{ statement.transactions_count }}</td>
+            <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static">{{ statement.opening_balance }}</td>
+            <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static">{{ statement.closing_balance }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% endblock %}
