@@ -3,18 +3,14 @@ from django.views.generic import DetailView, ListView, FormView
 
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render, redirect
-from statements.pydantic import TransactionEntity
-from typing import List
 from statements.services.transactions import (
-    get_transactions,
     get_transactions_from_uploaded_file,
     create_or_update_transactions,
 )
 from statements.models import Statement, Transaction
 from django.contrib.auth.decorators import login_required
 from statements.form import UploadFileForm
-from statements.serializers import StatementsSerializer, TransactionsSerializer
-from datetime import date
+from statements.serializers import StatementSerializer, TransactionsSerializer
 
 
 class LandingPage(DetailView):
@@ -23,6 +19,7 @@ class LandingPage(DetailView):
 
 
 class StatementsDetailView(DetailView):
+
     def get(self, request: HttpRequest, *args: Any, **kwargs: Any) -> HttpResponse:
         latest_statement: Statement = (
             Statement.objects.filter(user=request.user).order_by("month").last()
@@ -51,10 +48,13 @@ class StatementsDetailView(DetailView):
 
 
 class StatementsListView(ListView):
-    @login_required
     def get(self, request: HttpRequest, *args: Any, **kwargs: Any) -> HttpResponse:
         statements = Statement.objects.filter(user=request.user).order_by("month")
-        return render(request, "statements.html", {"statements": statements})
+        return render(
+            request,
+            "statements.html",
+            {"statements": StatementSerializer(statements, many=True).data},
+        )
 
 
 class UploadFileView(FormView):
@@ -77,7 +77,7 @@ class UploadFileView(FormView):
                     transactions=transactions,
                     user=request.user,
                 )
-                serialized_statements = StatementsSerializer(statements, many=True)
+                serialized_statements = StatementSerializer(statements, many=True)
                 return render(
                     request,
                     "statements.html",

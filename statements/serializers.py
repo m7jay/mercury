@@ -2,7 +2,7 @@ from rest_framework import serializers
 from statements.models import Statement, Transaction
 
 
-class StatementsSerializer(serializers.ModelSerializer):
+class StatementSerializer(serializers.ModelSerializer):
     transactions_count = serializers.SerializerMethodField()
     opening_balance = serializers.SerializerMethodField()
     closing_balance = serializers.SerializerMethodField()

@@ -8,7 +8,7 @@
     <div class="pt-2 hidden space-x-6 md:flex font-semibold">
       {% if user.is_authenticated %}
         <a href="/" class="hover:text-blue-600">Home</a>
-        <a href="/transactions" class="hover:text-blue-600">Transactions</a>
+        <a href="/statements" class="hover:text-blue-600">Statements</a>
         <a href="/upload" class="hover:text-blue-600">Upload</a>
         <a href="#" class="hover:text-blue-600">Summary</a>
         <a href="#" class="hover:text-blue-600">About</a>
@@ -33,7 +33,7 @@
     <div id="menu" class="relative flex-col items-center self-end py-8 pt-10 space-y-6 font-bold bg-black sm:w-auto sm:self-center text-white left-6 right-6 drop-shadow-md hidden">
       {% if user.is_authenticated %}
         <a href="/" class="hover:text-gray-400">Home</a>
-        <a href="/transactions" class="hover:text-gray-400">Transactions</a>
+        <a href="/statements" class="hover:text-gray-400">Statements</a>
         <a href="#" class="hover:text-gray-400">Summary</a>
         <a href="#" class="hover:text-gray-400">About</a>
       {% else %}
