@@ -40,3 +40,16 @@ class StatementsSerializer(serializers.ModelSerializer):
             "opening_balance",
             "closing_balance",
         ]
+
+
+class TransactionsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Transaction
+        fields = [
+            "transaction_id",
+            "transaction_date",
+            "amount_deposited",
+            "amount_withdrawn",
+            "balance",
+            "others",
+        ]
