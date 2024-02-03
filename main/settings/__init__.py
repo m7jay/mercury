@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     # "allauth.socialaccount.providers.google",
     # mercury apps
     "statements",
+    "summary",
 ]
 
 MIDDLEWARE = [
