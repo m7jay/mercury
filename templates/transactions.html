@@ -1,4 +1,5 @@
 {% extends '_base.html' %}
+{% load currency %}
 
 {% block content %}
   <div class="container mx-auto my-4 mt-8 relative overflow-x-auto">
@@ -24,7 +25,7 @@
       <tbody>
         <tr class="font-semibold text-gray-900 dark:text-black">
           <th scope="row" class="px-6 py-3 text-left">Opening Balance:</th>
-          <td class="px-6 py-3">{{ opening_balance }}</td>
+          <td class="px-6 py-3">{{ opening_balance|format_amount }}</td>
         </tr>
         {% for transaction in transactions %}
           <tr class="border-b border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-200">
@@ -33,19 +34,19 @@
             <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static">{{ transaction.transaction_id }}</td>
             <td class="w-full lg:w-auto p-3 text-center border border-b block lg:table-cell relative lg:static">
               {% if transaction.amount_deposited %}
-                <span class="text-green-600">{{ transaction.amount_deposited }}</span>
+                <span class="text-green-600">{{ transaction.amount_deposited|format_amount }}</span>
               {% else %}
                 <span class="text-grey-800">-</span>
               {% endif %}
             </td>
             <td class="w-full lg:w-auto p-3 text-center border border-b block lg:table-cell relative lg:static">
               {% if transaction.amount_withdrawn %}
-                <span class="text-red-600">{{ transaction.amount_withdrawn }}</span>
+                <span class="text-red-600">{{ transaction.amount_withdrawn|format_amount }}</span>
               {% else %}
                 <span class="text-grey-800">-</span>
               {% endif %}
             </td>
-            <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static">{{ transaction.balance }}</td>
+            <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static">{{ transaction.balance|format_amount }}</td>
             {% comment %} <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static">
               {% if transaction.others %}
                 <span>{{ transaction.others }}</span>
@@ -59,7 +60,7 @@
       <tfoot>
         <tr class="font-semibold text-gray-900 dark:text-black">
           <th scope="row" class="px-6 py-3 text-left">Closing Balance:</th>
-          <td class="px-6 py-3">{{ closing_balance }}</td>
+          <td class="px-6 py-3">{{ closing_balance|format_amount }}</td>
         </tr>
       </tfoot>
     </table>

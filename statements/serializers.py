@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from statements.models import Statement, Transaction
+from main.utils.amount import format_amount
 
 
 class StatementSerializer(serializers.ModelSerializer):
