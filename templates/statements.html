@@ -16,6 +16,7 @@
           <th scope="col" class="px-6 py-3 bg-gray-50 dark:bg-gray-800 text-center">Transactions Count</th>
           <th scope="col" class="px-6 py-3 bg-gray-50 dark:bg-gray-800 text-center">Opening Balance</th>
           <th scope="col" class="px-6 py-3 bg-gray-50 dark:bg-gray-800 text-center">Closing Balance</th>
+          <th scope="col" class="px-6 py-3 bg-gray-50 dark:bg-gray-800 text-center">Diff</th>
         </tr>
       </thead>
 
@@ -29,6 +30,13 @@
             <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static">{{ statement.transactions_count }}</td>
             <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static">{{ statement.opening_balance }}</td>
             <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static">{{ statement.closing_balance }}</td>
+            <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static">
+              {% if statement.diff > 0 %}
+                <span class="text-green-600">{{ statement.diff }}</span>
+              {% else %}
+                <span class="text-red-600">{{ statement.diff }}</span>
+              {% endif %}
+            </td>
           </tr>
         {% endfor %}
       </tbody>

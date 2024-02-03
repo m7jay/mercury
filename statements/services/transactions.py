@@ -7,6 +7,7 @@ from babel.numbers import format_currency, parse_decimal, NumberFormatError
 from django.contrib.auth import get_user_model
 from statements.models import Statement, Transaction
 from typing import Dict, List
+import time
 
 User = get_user_model()
 
@@ -133,6 +134,7 @@ def get_transactions_from_uploaded_file(
             if txn_date == "Txn Date" or txn_date == "Account Statement":
                 continue
             raise
+        time.sleep(1)
     return transactions
 
 

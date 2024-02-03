@@ -17,7 +17,7 @@
           <th scope="col" class="px-6 py-3 bg-gray-50 dark:bg-gray-800 text-center">Amount Deposited</th>
           <th scope="col" class="px-6 py-3 bg-gray-50 dark:bg-gray-800 text-center">Amount Withdrawn</th>
           <th scope="col" class="px-6 py-3 bg-gray-50 dark:bg-gray-800 text-center">Balance</th>
-          <th scope="col" class="px-6 py-3 bg-gray-50 dark:bg-gray-800 text-center">Notes</th>
+          {% comment %} <th scope="col" class="px-6 py-3 bg-gray-50 dark:bg-gray-800 text-center">Notes</th> {% endcomment %}
         </tr>
       </thead>
 
@@ -46,13 +46,13 @@
               {% endif %}
             </td>
             <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static">{{ transaction.balance }}</td>
-            <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static">
+            {% comment %} <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static">
               {% if transaction.others %}
                 <span>{{ transaction.others }}</span>
               {% else %}
                 <span>-</span>
               {% endif %}
-            </td>
+            </td> {% endcomment %}
           </tr>
         {% endfor %}
       </tbody>
