@@ -23,7 +23,9 @@
         {% for statement in statements %}
           <tr class="border-b border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-200">
             <td class="w-fit lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static">{{ forloop.counter }}</td>
-            <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static">{{ statement.month }}</td>
+            <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static">
+              <a href="/transactions/{{ statement.id }}" class="px-6 py-2 text-white bg-black rounded-full baseline text-center hover:bg-blue-800">{{ statement.month }}</a>
+            </td>
             <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static">{{ statement.transactions_count }}</td>
             <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static">{{ statement.opening_balance }}</td>
             <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static">{{ statement.closing_balance }}</td>
