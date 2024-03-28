@@ -26,6 +26,9 @@
         <tr class="font-semibold text-gray-900 dark:text-black">
           <th scope="row" class="px-6 py-3 text-left">Opening Balance:</th>
           <td class="px-6 py-3">{{ opening_balance|format_amount }}</td>
+          <td class="px-6 py-3">
+            <a href="/statements/transactions/{{ statement.unique_id }}/tags">View by Tags</a>
+          </td>
         </tr>
         {% for transaction in transactions %}
           <tr class="border-b border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-200">
