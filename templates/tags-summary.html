@@ -1,0 +1,70 @@
+{% extends '_base.html' %}
+
+{% block content %}
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <div class="container mx-auto my-4 mt-8 relative overflow-x-auto">
+    <canvas id="myChart"></canvas>
+  </div>
+  <script>
+const ctx = document.getElementById('myChart').getContext('2d');
+const myChart = new Chart(ctx, {
+  data: {
+    labels : [{% for item in uber.labels %}"{{ item }}",{% endfor %}],
+      datasets: [{
+        type: 'line',
+        label: "Swiggy",
+        data : [{% for item in swiggy.values %}{{ item }},{% endfor %}],
+        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+        borderColor: 'rgba(75, 192, 192, 1)',
+        borderWidth: 1,
+        fill: false,
+        stepped: false
+      },
+      {
+        type: 'line',
+        label: "Uber",
+        data : [{% for item in uber.values %}{{ item }},{% endfor %}],
+        backgroundColor: 'red',
+        borderColor: 'red',
+        borderWidth: 1
+      },{
+        type: 'line',
+        label: "airtel",
+        data : [{% for item in airtel.values %}{{ item }},{% endfor %}],
+        backgroundColor: 'blue',
+        borderColor: 'blue',
+        borderWidth: 1
+      }]
+  },
+  options: {
+    plugins: {
+      tooltip: {
+          callbacks: {
+              label: function(context) {
+                  let label = context.dataset.label || '';
+
+                  if (label) {
+                      label += ': ';
+                  }
+                  if (context.parsed.y !== null) {
+                      label += new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR' }).format(context.parsed.y);
+                  }
+                  return label;
+              }
+          }
+      }
+  },
+    scales: {
+      y: {
+        ticks: {
+          // Format y-axis labels as INR
+          callback: function (value, index, values) {
+            return '₹ ' + new Intl.NumberFormat('en-IN').format(value);
+          }
+        }
+      }
+    }
+  }
+});
+</script>
+{% endblock %}
