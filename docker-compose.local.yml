@@ -19,6 +19,7 @@ services:
       - "3310:3306"
     volumes:
       - ./docker/mysql-local-init:/docker-entrypoint-initdb.d
+      - mercury-db-data:/var/lib/mysql   
     logging:
       driver: "json-file"
       options:
@@ -43,3 +44,6 @@ services:
         max-size: 10m
         max-file: "7"
         compress: "true"
+
+volumes:
+  mercury-db-data:
