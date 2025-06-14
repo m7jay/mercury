@@ -22,7 +22,7 @@ from .views import LandingPage
 urlpatterns = [
     path("", LandingPage.as_view(), name="landing-page"),
     path("admin/", admin.site.urls),
-    path("accounts/", include("allauth.urls")),
-    path("statements/", include("statements.urls")),
-    path("summary/", include("summary.urls")),
+    path("accounts/", include("allauth.urls"), name="accounts"),
+    path("statements/", include("statements.urls"), name="statements"),
+    path("summary/", include("summary.urls"), name="summary"),
 ]
