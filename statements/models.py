@@ -22,7 +22,7 @@ class Statement(models.Model):
 
 class Transaction(models.Model):
     transaction_id = models.CharField(
-        max_length=1024, null=False, blank=False, db_index=True
+        max_length=256, null=False, blank=False, db_index=True
     )
     transaction_date = models.DateField(blank=False, null=False)
     amount_deposited = models.DecimalField(
