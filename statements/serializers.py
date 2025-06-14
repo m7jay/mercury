@@ -23,16 +23,20 @@ class StatementSerializer(serializers.ModelSerializer):
         )
         # revert the first transaction to get the opening balance
         return (
-            first_transaction.balance
-            - first_transaction.amount_deposited
-            + first_transaction.amount_withdrawn
+            (
+                first_transaction.balance
+                - first_transaction.amount_deposited
+                + first_transaction.amount_withdrawn
+            )
+            if first_transaction
+            else 0
         )
 
     def get_closing_balance(self, statement):
         transaction: Transaction = (
             statement.transactions.all().order_by("-transaction_date").first()
         )
-        return transaction.balance
+        return transaction.balance if transaction else 0
 
     def get_total_expenses(self, statement):
         total_expenses = 0
