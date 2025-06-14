@@ -9,5 +9,5 @@ logger = getLogger("__name__")
 class LandingPage(DetailView):
     def get(self, request):
         if request.user.is_authenticated:
-            return redirect(reversed("statements"))
+            return redirect("/statements/")
         return render(request, "index.html")
